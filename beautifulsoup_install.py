@@ -8,5 +8,11 @@ def convert_text(html_code):
 
 def site_nytimes(section):
     print("http://www.nytimes.com/pages/" + section + "/index.html")
-    
-webbrowser.open("http://www.nytimes.com/pages/world/index.html")
+
+def site_twitter(section):
+    print("https://twitter.com/search?q=" + section + "&src=typd&lang=en")
+
+def open_link(section):
+    import webbrowser
+    webbrowser.open("http://www." + section + ".com/")
+
