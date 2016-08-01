@@ -6,7 +6,7 @@ def convert_text(html_code):
     soup = BeautifulSoup(txt, 'html.parser')
     print(soup.get_text())
 
-def nytimes(section):
+def site_nytimes(section):
     print("http://www.nytimes.com/pages/" + section + "/index.html")
     
 webbrowser.open("http://www.nytimes.com/pages/world/index.html")

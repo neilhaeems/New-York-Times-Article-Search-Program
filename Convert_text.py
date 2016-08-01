@@ -13,7 +13,7 @@ convert_text(x)
 
 #below - I'm going to try and break up the code
 
-def twitter(section):
+def site_twitter(section):
     print("https://twitter.com/search?q=" + section + "&src=typd&lang=en")  
 
 #use "https://twitter.com/ " to see # get printed instead of links
