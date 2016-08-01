@@ -15,4 +15,4 @@ def site_twitter(section):
 def open_link(section):
     import webbrowser
     webbrowser.open("http://www." + section + ".com/")
-
+    
