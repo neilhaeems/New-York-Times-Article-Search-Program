@@ -10,4 +10,10 @@ def convert_text(html_code):
 x = input('Type a website here: ')
 convert_text(x)
 
+
+#below - I'm going to try and break up the code
+
+def twitter(section):
+    print("https://twitter.com/search?q=" + section + "&src=typd&lang=en")  
+
 #use "https://twitter.com/ " to see # get printed instead of links
