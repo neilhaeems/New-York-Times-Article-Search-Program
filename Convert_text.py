@@ -7,6 +7,7 @@ def convert_text(html_code):
     soup = BeautifulSoup(txt, 'html.parser')
     for link in soup.find_all('a'):
         print(link.get('href'))
+
 x = input('Type a website here: ')
 convert_text(x)
 
