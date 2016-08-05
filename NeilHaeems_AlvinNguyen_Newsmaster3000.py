@@ -11,7 +11,9 @@ def convert_text(url):
     response = requests.get(url)
     txt = response.text
     soup = BeautifulSoup(txt, 'html.parser')
-    return soup
+    link_only = soup.h2.a
+    return link.get('href')
+
 # soup.get_text()
 
 # returns link for nytimes with category term
@@ -20,7 +22,8 @@ def site_nytimes(section):
     return search_url
 
 # takes in html file of category page and returns url of specific article
-def get_article(category):
+def get_article(html_file):
+    html_doc = str(html_file)
     only_h2_tags = SoupStrainer("h2")
     return (BeautifulSoup(html_doc, "html.parser", parse_only=only_h2_tags).prettify())
 
