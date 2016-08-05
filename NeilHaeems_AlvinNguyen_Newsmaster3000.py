@@ -9,24 +9,27 @@ sub_categories = {'africa':'world/africa', 'americas':'world/americas', 'asia':'
 # returns link for nytimes with category term
 def site_nytimes(section):
     search_url = "http://www.nytimes.com/pages/" + str(section) + "/index.html"
-    return search_url
+    return str(search_url)
 
 # returns link for nytimes with subcategory term
 def site_nytimes_sub(section):
     search_url = "http://www.nytimes.com/pages/" + sub_categories[section] + "/index.html"
-    return search_url
+    return str(search_url)
 
 # returns twitter link with search term
 def site_twitter(section):
-    return "https://twitter.com/search?q=" + section + "&src=typd&lang=en"
+    return str("https://twitter.com/search?q=" + section + "&src=typd&lang=en")
 
 # takes url as input, converts to html, parses, and finds article url
 def get_article(url):
     response = requests.get(url)
     txt = response.text
     soup = BeautifulSoup(txt, 'html.parser')
-    link_only = soup.h2.a
-    return link.get('href')
+    try:
+        link_only = soup.h2.a
+    except AttributeError:
+        link_only = soup.h3.a
+    return link_only.get('href')
 
 # opens website in browser
 def open_link(website):
@@ -58,16 +61,18 @@ repeat = True
 while repeat == True:
     source = input("Input a search term for a news article: ")
     if source in search_terms:
-        site_nytimes(source)
-        print("categories work")
+        url = site_nytimes(source)
+        get_article(url)
+        print("article aquired")
         # run url into h2 and h3 finder
         # get first h2 html file
         # simplify html file
         # print snippet
         # ask user option - more articles, read full article, twitter
     elif source in sub_categories:
-        site_nytimes_sub(source)
-        print("sub categories work")
+        url = site_nytimes_sub(source)
+        get_article(url)
+        print("article aquired")
         # run url into h2 and h3 finder
         # get first h2 html file
         # simplify html file
