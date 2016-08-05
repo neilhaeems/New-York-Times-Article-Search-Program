@@ -2,9 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
 
-# lines 4-6: lists of appropriate search terms and subcategories for NYT
+# lines 6-10: lists of appropriate search terms and subcategories
 search_terms = ["world", "US", "politics", "nyregion", "business", "technology", "science", "health", "sports", "education", "obituaries", "todayspaper"]
 sub_categories = {'africa':'world/africa', 'americas':'world/americas', 'asia':'world/asia', 'europe':'world/europe', 'middle east':'world/middleeast', 'dealbook':'dealbook', 'markets':'research/markets', 'economy':'business/economy', 'energy and environment':'business/energy-environment', 'media':'business/media', 'personal tech':'technology/personaltech', 'entreprenuership':'smallbusiness', 'environment':'science/earth', 'space':'science/space', 'cosmos':'science/space'}
+appropriate_another_article = ["another", "another article", "1", "similar", "similar article"]
+appropriate_full_article = ["full", "full article", "open", "open in browser", "browser"]
+appropriate_social_media = ["social media", "twitter", "posts"]
+appropriate_search_again = ["seach again", "new search", "new term"]
+
 
 # returns link for nytimes with category term
 def site_nytimes(section):
@@ -59,23 +64,36 @@ def date_article(url):
 print("Welcome to Newsmaster 3000!")
 repeat = True
 while repeat == True:
-    source = input("Input a search term for a news article: ")
+    source = input("Input a search term for a news article: ").lower()
     if source in search_terms:
         url = site_nytimes(source)
         get_article(url)
         print("article aquired")
-        # run url into h2 and h3 finder
-        # get first h2 html file
-        # simplify html file
+        # article is parsed
         # print snippet
-        # ask user option - more articles, read full article, twitter
+        next_step = input("Do you want to read another similar article, search again, open the full article, or see social media posts about this topic?: ")
+        ask_again = True
+        while ask_again == True:
+            if next_step in appropriate_another_article:
+                #run another article
+                pass
+            elif next_step in appropriate_search_again:
+                ask_again == False
+            elif next_step in appropriate_full_article:
+                open_link(url)
+            elif next_step in appropriate_social_media:
+                #print twitter post
+                pass
+            elif next_step == "exit" and "exit()":
+                ask_again = False
+                repeat = False
+            else:
+                print("Sorry, your input was not valid")
     elif source in sub_categories:
         url = site_nytimes_sub(source)
         get_article(url)
         print("article aquired")
-        # run url into h2 and h3 finder
-        # get first h2 html file
-        # simplify html file
+        # aricle is parsed
         # print snippet
         # ask user option - more articles, read full article, twitter
     elif source == "exit" or source == "exit()":
