@@ -1,10 +1,12 @@
 import requests
 import webbrowser
+import random
+from datetime import date
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
 
 
-# lines 6-10: lists, tuples, and dictionaries of appropriate search terms and subcategories
+# lines 6-15: lists, tuples, and dictionaries of appropriate search terms and subcategories, used in functions below
 search_terms = ("world", "US", "politics", "nyregion", "business", "technology", "science", "health", "sports", "education", "obituaries", "todayspaper");
 sub_categories = {'africa':'world/africa', 'americas':'world/americas', 'asia':'world/asia', 'europe':'world/europe', 'middle east':'world/middleeast', 'dealbook':'dealbook', 'markets':'research/markets', 'economy':'business/economy', 'energy and environment':'business/energy-environment', 'media':'business/media', 'personal tech':'technology/personaltech', 'entreprenuership':'smallbusiness', 'environment':'science/earth', 'space':'science/space', 'cosmos':'science/space', 'tech': "technology"}
 appropriate_another_article = ("another", "another article", "similar", "similar article", "another similar article", "read another similar article");
@@ -43,13 +45,29 @@ def get_article(url):
     return link_only.get('href')
 
 
-# adds similar articles to the global variable "list_of_similar_articles"
+# adds lists to the global variable "list_of_similar_articles"
 def add_link_to_list(url):
     response = requests.get(url)
     txt = response.text
     soup = BeautifulSoup(txt, 'html.parser')
-    for link in txt.find_all('h2'):
-        print(link.get('href'))
+    for link in soup.find_all('a'):
+        list_of_similar_articles.append(link.get('href'))
+    return (list_of_similar_articles)
+
+
+# returns string of /year/ for next funtion
+def year_with_slashes():
+    return "/" + str(date.today().year) + "/"
+
+
+# takes in list of URLs from above and keeps only the articles
+def keep_links():
+    return([str(x) for x in list_of_similar_articles if year_with_slashes() in str(x)])
+
+
+# function that chooses random item from list_of_similar_articles for user
+def similar_link(list):
+    return (random.choice(list))
 
 
 # opens website in browser
@@ -66,7 +84,8 @@ def date_article(url):
     print(date[1:-1])
 
 # gives user options for what to do after they read an article
-def what_next():
+def what_next(page):
+    url = str(page)
     ask_again = True
     while ask_again == True:
         next_step = input("Do you want to read another similar article, search again, open the full article, or see social media posts about this topic?: ").lower()
@@ -75,12 +94,12 @@ def what_next():
             ask_again = False
         elif next_step in appropriate_another_article:
             #run another article
-            pass
-            return "another article"
+            x = add_link_to_list(url)
+            y = keep_links() 
+            url = similar_link(y)
+            print(url)
         elif next_step in appropriate_full_article:
-            open_link(article)
-            return "full article"
-            ask_again = False
+            open_link(url)
         elif next_step in appropriate_social_media:
             #print twitter post
             pass
@@ -89,11 +108,7 @@ def what_next():
             return "quit"
             ask_again = False 
         else:
-            print("\nSorry, your input was not valid")
-
-
-# given NYT category page, returns list of h2 and h3 links
-#def link_lister(search_url):
+            print("Sorry, your input was not valid")
     
 
 
@@ -105,6 +120,7 @@ def what_next():
 print("Welcome to Newsmaster 3000!")
 repeat = True
 while repeat == True:
+    list_of_similar_articles = []
     source = input("Input a search term for a news article: ").lower()
     if source in search_terms:
         url = site_nytimes(source)
@@ -112,7 +128,7 @@ while repeat == True:
         print(article)
         # article is parsed
         # print snippet
-        status = what_next()
+        status = what_next(url)
         if status == "quit":
             repeat = False
     elif source in sub_categories:
@@ -121,7 +137,7 @@ while repeat == True:
         print(article)
         # aricle is parsed
         # print snippet
-        status = what_next()
+        status = what_next(url)
         if status == "quit":
             repeat = False
     elif source == "exit" or source == "exit()":
