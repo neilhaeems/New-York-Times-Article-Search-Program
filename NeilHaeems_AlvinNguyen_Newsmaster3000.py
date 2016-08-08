@@ -97,7 +97,6 @@ def get_info(url):
 def what_next(page):
     url = str(page)
     ask_again = True
-    article = get_article(url)
     while ask_again == True:
         next_step = input("Do you want to read another similar article, search again, open the full article, or see social media posts about this topic?: ").lower()
         if next_step in appropriate_search_again:
@@ -109,7 +108,7 @@ def what_next(page):
             url = similar_link(y)
             get_info(url)
         elif next_step in appropriate_full_article:
-            open_link(article)
+            open_link(url)
         elif next_step in appropriate_social_media:
             #print twitter post
             pass
@@ -136,14 +135,15 @@ while repeat == True:
         html_doc = html_file(url)
         article = get_article(url)
         get_info(article)
-        status = what_next(url)
+        status = what_next(article)
         if status == "quit":
             repeat = False
     elif source in sub_categories:
         url = site_nytimes_sub(source)
+        html_doc = html_file(url)
         article = get_article(url)
         get_info(article)
-        status = what_next(url)
+        status = what_next(article)
         if status == "quit":
             repeat = False
     elif source == "exit" or source == "exit()":
