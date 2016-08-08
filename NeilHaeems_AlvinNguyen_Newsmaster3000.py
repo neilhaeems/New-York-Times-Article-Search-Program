@@ -8,7 +8,7 @@ from bs4 import SoupStrainer
 
 # lines 6-15: lists, tuples, and dictionaries of appropriate search terms and subcategories, used in functions below
 search_terms = ("world", "US", "politics", "nyregion", "business", "technology", "science", "health", "sports", "education", "obituaries", "todayspaper");
-sub_categories = {'africa':'world/africa', 'americas':'world/americas', 'asia':'world/asia', 'europe':'world/europe', 'middle east':'world/middleeast', 'dealbook':'dealbook', 'markets':'research/markets', 'economy':'business/economy', 'energy and environment':'business/energy-environment', 'media':'business/media', 'personal tech':'technology/personaltech', 'entreprenuership':'smallbusiness', 'environment':'science/earth', 'space':'science/space', 'cosmos':'science/space', 'tech': "technology"}
+sub_categories = {'africa':'world/africa', 'americas':'world/americas', 'asia':'world/asia', 'europe':'world/europe', 'middle east':'world/middleeast', 'dealbook':'dealbook', 'markets':'research/markets', 'economy':'business/economy', 'energy and environment':'business/energy-environment', 'media':'business/media', 'personal tech':'technology/personaltech', 'entrepreneurship':'business/smallbusiness', 'environment':'science/earth', 'space':'science/space', 'cosmos':'science/space', 'tech': "technology"}
 appropriate_another_article = ("another", "another article", "similar", "similar article", "another similar article", "read another similar article");
 appropriate_full_article = ("full", "full article", "open", "open in browser", "browser", "open the full article");
 appropriate_social_media = ("social media", "twitter", "posts", "read social media posts", "read social media posts about this topic");
@@ -33,7 +33,15 @@ def site_twitter(section):
     return str("https://twitter.com/search?q=" + section + "&src=typd&lang=en")
 
 
-# takes url as input, converts to html, parses, and finds article url
+# alorithm that takes url as input and returns html file
+def html_file(url):
+    response = requests.get(url)
+    txt = response.text
+    soup = BeautifulSoup(txt, 'html.parser')
+    return soup
+
+
+# algorithm that takes url as input, converts to html, parses html, and finds url of headlining article
 def get_article(url):
     response = requests.get(url)
     txt = response.text
@@ -45,7 +53,7 @@ def get_article(url):
     return link_only.get('href')
 
 
-# adds lists to the global variable "list_of_similar_articles"
+# algorithm that adds urls to the global variable "list_of_similar_articles", if given search page url
 def add_link_to_list(url):
     response = requests.get(url)
     txt = response.text
@@ -55,17 +63,17 @@ def add_link_to_list(url):
     return (list_of_similar_articles)
 
 
-# returns string of /year/ for next funtion
-def year_with_slashes():
-    return "/" + str(date.today().year) + "/"
-
-
 # takes in list of URLs from above and keeps only the articles
 def keep_links():
     return([str(x) for x in list_of_similar_articles if year_with_slashes() in str(x)])
 
 
-# function that chooses random item from list_of_similar_articles for user
+# returns string of /year/ for next funtion
+def year_with_slashes():
+    return "/" + str(date.today().year) + "/"
+
+
+# procedure that chooses random item from list_of_similar_articles for user
 def similar_link(list):
     return (random.choice(list))
 
@@ -74,32 +82,34 @@ def similar_link(list):
 def open_link(website):
     webbrowser.open(website)
 
+# algorithm that returns the title and a description of the article, if given the url for the article
+def get_info(url):
+    soup = html_file(url)
+    title = "Title: " + soup.title.string[:-21]
+    snippet = "Description: " + str(soup.find(itemprop="description"))[15:-45]
+    print(title + '\n' + snippet)
 
-# returns date of article on NYT
-def date_article(url):
-    response = requests.get(url)
-    txt = response.text
-    soup = BeautifulSoup(txt, 'html.parser')
-    date = soup.p.string
-    print(date[1:-1])
+
+# twitter
+
 
 # gives user options for what to do after they read an article
 def what_next(page):
     url = str(page)
     ask_again = True
+    article = get_article(url)
     while ask_again == True:
         next_step = input("Do you want to read another similar article, search again, open the full article, or see social media posts about this topic?: ").lower()
         if next_step in appropriate_search_again:
             return "search again"
             ask_again = False
         elif next_step in appropriate_another_article:
-            #run another article
             x = add_link_to_list(url)
             y = keep_links() 
             url = similar_link(y)
-            print(url)
+            get_info(url)
         elif next_step in appropriate_full_article:
-            open_link(url)
+            open_link(article)
         elif next_step in appropriate_social_media:
             #print twitter post
             pass
@@ -109,7 +119,6 @@ def what_next(page):
             ask_again = False 
         else:
             print("Sorry, your input was not valid")
-    
 
 
 
@@ -124,19 +133,16 @@ while repeat == True:
     source = input("Input a search term for a news article: ").lower()
     if source in search_terms:
         url = site_nytimes(source)
+        html_doc = html_file(url)
         article = get_article(url)
-        print(article)
-        # article is parsed
-        # print snippet
+        get_info(article)
         status = what_next(url)
         if status == "quit":
             repeat = False
     elif source in sub_categories:
         url = site_nytimes_sub(source)
         article = get_article(url)
-        print(article)
-        # aricle is parsed
-        # print snippet
+        get_info(article)
         status = what_next(url)
         if status == "quit":
             repeat = False
@@ -144,4 +150,3 @@ while repeat == True:
         repeat = False
     else:
         print("Invalid search term. Please try again.")
-        
