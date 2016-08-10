@@ -1,3 +1,5 @@
+# below this line are modules, functions, and variables that are used within the program interface
+
 import requests
 import webbrowser
 import random
@@ -7,8 +9,8 @@ from bs4 import SoupStrainer
 
 
 # lines 6-15: lists, tuples, and dictionaries of appropriate search terms and subcategories, used in functions below
-search_terms = ("world", "US", "politics", "nyregion", "business", "technology", "science", "health", "sports", "education", "obituaries", "todayspaper");
-sub_categories = {'africa':'world/africa', 'americas':'world/americas', 'asia':'world/asia', 'europe':'world/europe', 'middle east':'world/middleeast', 'dealbook':'dealbook', 'markets':'research/markets', 'economy':'business/economy', 'energy and environment':'business/energy-environment', 'media':'business/media', 'personal tech':'technology/personaltech', 'entrepreneurship':'business/smallbusiness', 'environment':'science/earth', 'space':'science/space', 'cosmos':'science/space', 'tech': "technology"}
+search_terms = ("world", "US", "politics", "nyregion", "business", "technology", "health", "sports", "education", "obituaries", "todayspaper");
+sub_categories = {'africa':'world/africa', 'americas':'world/americas', 'asia':'world/asia', 'europe':'world/europe', 'middle east':'world/middleeast', 'dealbook':'dealbook', 'markets':'research/markets', 'economy':'business/economy', 'energy and environment':'business/energy-environment', 'media':'business/media', 'personal tech':'technology/personaltech', 'entrepreneurship':'business/smallbusiness', 'todays paper': 'todayspaper', 'tech':'technology', 'environment':'business/energy-environment'}
 appropriate_another_article = ("another", "another article", "similar", "similar article", "another similar article", "read another similar article");
 appropriate_full_article = ("full", "full article", "open", "open in browser", "browser", "open the full article");
 appropriate_social_media = ("social media", "twitter", "posts", "read social media posts", "read social media posts about this topic");
@@ -121,7 +123,6 @@ def what_next(page):
 
 
 
-
 ##------------------------------------------------------------------------------##
 
 # user interface for final project - this is what users interact with
@@ -150,3 +151,31 @@ while repeat == True:
         repeat = False
     else:
         print("Invalid search term. Please try again.")
+
+
+
+##------------------------------------------------------------------------------##
+#TESTS
+
+# tests function "site_nytimes" - test w/ input_term "world" and output_url "http://www.nytimes.com/pages/world/index.html"
+def test_1(input_term, output_url):
+    if site_nytimes(input_term) == output_url:
+        print("Test passes!")
+    else:
+        print("Test fails")
+
+
+# tests function "site_nytimes_sub" - test w/ input_term "entrepreneurship" and output_url "http://www.nytimes.com/pages/business/smallbusiness/index.html"
+def test_2(input_term, output_url):
+    if site_nytimes_sub(input_term) == output_url:
+        print("Test passes!")
+    else:
+        print("Test fails")
+
+
+# tests function "site_twitter" - test w/ input_term "democrat" and output_url "https://twitter.com/search?q=democrat&src=typd&lang=en"
+def test_3(input_term, output_url):
+    if site_twitter(input_term) == output_url:
+        print("Test passes!")
+    else:
+        print("Test fails")
