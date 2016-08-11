@@ -9,7 +9,7 @@ from bs4 import SoupStrainer
 
 
 # lines 6-15: lists, tuples, and dictionaries of appropriate search terms and subcategories, used in functions below
-search_terms = ("world", "US", "politics", "nyregion", "business", "technology", "health", "sports", "education", "obituaries", "todayspaper");
+search_terms = ("world", "politics", "business", "technology", "sports");
 sub_categories = {'africa':'world/africa', 'americas':'world/americas', 'asia':'world/asia', 'europe':'world/europe', 'middle east':'world/middleeast', 'dealbook':'dealbook', 'markets':'research/markets', 'economy':'business/economy', 'energy and environment':'business/energy-environment', 'media':'business/media', 'personal tech':'technology/personaltech', 'entrepreneurship':'business/smallbusiness', 'todays paper': 'todayspaper', 'tech':'technology', 'environment':'business/energy-environment'}
 appropriate_another_article = ("another", "another article", "similar", "similar article", "another similar article", "read another similar article");
 appropriate_full_article = ("full", "full article", "open", "open in browser", "browser", "open the full article");
@@ -102,9 +102,9 @@ def get_social_media(url):
     for link in html_doc.find_all('a'):
         lst.append(link.get('href'))
     try:
-        return 'https://twitter.com/' + [x for x in lst if 'nytimes/status' in str(x)][0]
+        open_link('https://twitter.com/' + [x for x in lst if 'nytimes/status' in str(x)][0])
     except IndexError:
-        pass
+        print("Sorry, no social media posts could be found about this topic.")
     
 
 
@@ -125,7 +125,7 @@ def what_next(page):
         elif next_step in appropriate_full_article:
             open_link(url)
         elif next_step in appropriate_social_media:
-            open_link(get_social_media(url))
+            get_social_media(url)
         elif next_step == "exit" or next_step == "exit()":
             return "quit"
             ask_again = False 
