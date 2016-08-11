@@ -67,7 +67,7 @@ def add_link_to_list(url):
 
 # takes in list of URLs from above and keeps only the articles
 def keep_links():
-    return([str(x) for x in list_of_similar_articles if year_with_slashes() in str(x)])
+    return [str(x) for x in list_of_similar_articles if year_with_slashes() in str(x)]
 
 
 # returns string of /year/ for next funtion
@@ -92,7 +92,20 @@ def get_info(url):
     print(title + '\n' + snippet)
 
 
-# twitter
+# algorithm for twitter - given a URL for New York Times article, will return url for Twitter comments
+def get_social_media(url):
+    lst = []
+    soup = html_file(url)
+    title = soup.title.string[:-21]
+    twitter_url = site_twitter(title)
+    html_doc = html_file(twitter_url)
+    for link in html_doc.find_all('a'):
+        lst.append(link.get('href'))
+    try:
+        return 'https://twitter.com/' + [x for x in lst if 'nytimes/status' in str(x)][0]
+    except IndexError:
+        pass
+    
 
 
 # gives user options for what to do after they read an article
@@ -112,9 +125,7 @@ def what_next(page):
         elif next_step in appropriate_full_article:
             open_link(url)
         elif next_step in appropriate_social_media:
-            #print twitter post
-            pass
-            return "social media"
+            open_link(get_social_media(url))
         elif next_step == "exit" or next_step == "exit()":
             return "quit"
             ask_again = False 
