@@ -5,7 +5,7 @@ import webbrowser
 import random
 from datetime import date
 from bs4 import BeautifulSoup
-from bs4 import SoupStrainer
+
 
 
 # lines 6-15: lists, tuples, and dictionaries of appropriate search terms and subcategories, used in functions below
