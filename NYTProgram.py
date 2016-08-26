@@ -163,30 +163,3 @@ while repeat == True:
     else:
         print("Invalid search term. Please try again.")
 
-
-
-##------------------------------------------------------------------------------##
-#TESTS
-
-# tests function "site_nytimes" - test w/ input_term "world" and output_url "http://www.nytimes.com/pages/world/index.html"
-def test_1(input_term, output_url):
-    if site_nytimes(input_term) == output_url:
-        print("Test passes!")
-    else:
-        print("Test fails")
-
-
-# tests function "site_nytimes_sub" - test w/ input_term "entrepreneurship" and output_url "http://www.nytimes.com/pages/business/smallbusiness/index.html"
-def test_2(input_term, output_url):
-    if site_nytimes_sub(input_term) == output_url:
-        print("Test passes!")
-    else:
-        print("Test fails")
-
-
-# tests function "site_twitter" - test w/ input_term "democrat" and output_url "https://twitter.com/search?q=democrat&src=typd&lang=en"
-def test_3(input_term, output_url):
-    if site_twitter(input_term) == output_url:
-        print("Test passes!")
-    else:
-        print("Test fails")

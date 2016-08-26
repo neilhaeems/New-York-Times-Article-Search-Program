@@ -16,7 +16,7 @@ e.	Environment
 f.	Politics
 g.	Sports
 
-For a full list, please refer to the last page of this file.
+For a full list, please refer to the end of this file.
 
 4.	Search terms are not case-sensitive. If a user enters “Economy”, “economy”, or “eCoNoMy”, the results will all be the same.
 
@@ -32,30 +32,22 @@ Do you want to read another similar article, search again, open the full article
 
 
 Option 1: Similar Article
-9.	If the user types in “similar article” (see the last page for a full list of acceptable commands), another “Title” and “Description” prompt will pop up, this time with a new article. The user will once again be given a choice between finding a similar article, entering a new search term, reading the full article, or seeing opinions on the topic.
+9.	If the user types in “similar article” (see the end for a full list of acceptable commands), another “Title” and “Description” prompt will pop up, this time with a new article. The user will once again be given a choice between finding a similar article, entering a new search term, reading the full article, or seeing opinions on the topic.
 
 Option 2: Search Again
-10.	If the user types in “search again” (see the last page for a full list of acceptable commands), the program will return to the following screen:
+10.	If the user types in “search again” (see the end for a full list of acceptable commands), the program will return to the following screen:
 Input a seach term for a news article: _
 
 11.	At this point, the user can input a new search term, read about a new article, and begin the whole process again.
 
 Option 3: Full Article
-12.	If the user types in “full article” (see the last page for a full list of acceptable commands), the article for which the user has read the title and description will be opened in the user’s browser, in a new tab. The user can then read the full article. When the user returns to the terminal, the program will give the user the four choices once again.
+12.	If the user types in “full article” (see the end for a full list of acceptable commands), the article for which the user has read the title and description will be opened in the user’s browser, in a new tab. The user can then read the full article. When the user returns to the terminal, the program will give the user the four choices once again.
 
 Option 4: Social Media
-13.	If the user types in “social media” (see the last page for a full list of acceptable commands), a twitter page for that article will open, in a new tab. This page will have comments from other people who read the article. Note: some articles do not have a social media post and many have uncensored comments. 
+13.	If the user types in “social media” (see the end for a full list of acceptable commands), a twitter page for that article will open, in a new tab. This page will have comments from other people who read the article. Note: some articles do not have a social media post and many have uncensored comments. 
 
 14.	If at any point the user wishes to exit the program, he or she can simply type “exit” or “exit()”. This will bring the user to the Python 3 terminal, outside of the UI. Once here, the user can run functions, etc. To exit, the user must type exit() once again.
 
-TESTING
-
-15.	There are three pre-designed testing functions. They test the “site_nytimes”, site_nytimes_sub” and “site_twitter” functions.
-
-16.	To run these tests, please open the py file and exit the UI. In the Python3 prompt, tests can be run with in the following manner:
-a.	test_1 (input_term, output_url), where the input term can be “world” or a similar prompt and the output url can be the corresponding URL “http://www.nytimes.com/pages/world/index.html”
-b.	test_2 (input_term, output_url), where the input term can be “entrepreneurship” or a similar prompt and the output URL can be the corresponding URL “http://www.nytimes.com/pages/business/smallbusiness/index.html”
-c.	test_3 (input_term, output_url), where the input term can be “democrat” or a similar prompt and the output url can be the corresponding URL “https://twitter.com/search?q=democrat&src=typd&lang=en”
 
 Acceptable Search Terms
 1.	World
