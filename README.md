@@ -13,8 +13,6 @@ e.	Environment
 f.	Politics
 g.	Sports
 
-For a full list, please refer to the end of this file.
-
 Search terms are not case-sensitive. If a user enters “Economy”, “economy”, or “eCoNoMy”, the results will all be the same.
 
 After the user types in the desired search term and hit enter, the program will take the term, find the corresponding URL for the New York Times category page, and pick the headlining article. The user will see a Title and a Description pop up.
@@ -29,19 +27,19 @@ The user can now choose to find a similar article, enter a new search term and r
 
 
 Option 1: Similar Article -
-If the user types in “similar article” (see the end for a full list of acceptable commands), another “Title” and “Description” prompt will pop up, this time with a new article. The user will once again be given a choice between finding a similar article, entering a new search term, reading the full article, or seeing opinions on the topic.
+If the user types in “similar article”, another “Title” and “Description” prompt will pop up, this time with a new article. The user will once again be given a choice between finding a similar article, entering a new search term, reading the full article, or seeing opinions on the topic.
 
 Option 2: Search Again -
-If the user types in “search again” (see the end for a full list of acceptable commands), the program will return to the following screen:
+If the user types in “search again”, the program will return to the following screen:
 Input a seach term for a news article: _
 
 At this point, the user can input a new search term, read about a new article, and begin the whole process again.
 
 Option 3: Full Article - 
-If the user types in “full article” (see the end for a full list of acceptable commands), the article for which the user has read the title and description will be opened in the user’s browser, in a new tab. The user can then read the full article. When the user returns to the terminal, the program will give the user the four choices once again.
+If the user types in “full article”, the article for which the user has read the title and description will be opened in the user’s browser, in a new tab. The user can then read the full article. When the user returns to the terminal, the program will give the user the four choices once again.
 
 Option 4: Social Media - 
-If the user types in “social media” (see the end for a full list of acceptable commands), a twitter page for that article will open, in a new tab. This page will have comments from other people who read the article. Note: some articles do not have a social media post and many have uncensored comments. 
+If the user types in “social media”, a twitter page for that article will open, in a new tab. This page will have comments from other people who read the article. Note: some articles do not have a social media post and many have uncensored comments. 
 
 If at any point the user wishes to exit the program, he or she can simply type “exit” or “exit()”. This will bring the user to the Python 3 terminal, outside of the UI. Once here, the user can run functions, etc. To exit, the user must type exit() once again.
 
