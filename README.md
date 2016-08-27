@@ -83,9 +83,6 @@ Acceptable Inputs for Full Article
 5.	Browser
 6.	Open the full article
 
-
-
-
 Acceptable Inputs for Searching Again
 1.	Search again
 2.	New search
