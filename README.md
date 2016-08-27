@@ -46,51 +46,3 @@ If the user types in “social media” (see the end for a full list of acceptab
 If at any point the user wishes to exit the program, he or she can simply type “exit” or “exit()”. This will bring the user to the Python 3 terminal, outside of the UI. Once here, the user can run functions, etc. To exit, the user must type exit() once again.
 
 
-Acceptable Search Terms
-1.	World
-2.	Politics
-3.	Business
-4.	Technology/Tech
-5.	Sports
-6.	Africa
-7.	Americas
-8.	Asia
-9.	Europe
-10.	Middle East
-11.	Markets
-12.	Economy
-13.	Energy and environment/Environment
-14.	Media
-15.	Personal Tech
-16.	Entrepreneurship
-
-Acceptable Inputs for Another Article
-1.	Another
-2.	Another article
-3.	Similar
-4.	Similar article
-5.	Another similar article
-6.	Read another similar article
-
-Acceptable Inputs for Full Article
-1.	Full
-2.	Full article
-3.	Open
-4.	Open in browser
-5.	Browser
-6.	Open the full article
-
-Acceptable Inputs for Searching Again
-1.	Search again
-2.	New search
-3.	New term
-4.	Search new article
-5.	New article
-
-
-Acceptable Inputs for Social Media
-1.	Social media
-2.	Twitter
-3.	Posts
-4.	Read social media posts
-5.	Read social media posts about this topic
